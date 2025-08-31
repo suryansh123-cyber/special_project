@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Surprise for Trisha 🎁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Landing Page Styles */
+        .landing-page {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .landing-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .gift-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .gift-button:active {
+            transform: translateY(-2px);
+        }
+
+        .gift-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .gift-button:hover::before {
+            left: 100%;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1.5rem;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 25%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 35%; right: 10%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 60%; left: 50%; animation-delay: 0.25s; }
+        .sparkle:nth-child(6) { top: 15%; left: 60%; animation-delay: 0.75s; }
+
+        /* Alert Styles */
+        .alert-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .alert-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .alert-message {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .alert-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .alert-button:hover {
+            background: #5a67d8;
+        }
+
+        /* Birthday Card Styles */
+        .birthday-card {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            padding: 1rem;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .decorations {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .balloon {
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+            margin: 0.5rem;
+        }
+
+        .balloon:nth-child(2) { animation-delay: -0.5s; }
+        .balloon:nth-child(3) { animation-delay: -1s; }
+        .balloon:nth-child(4) { animation-delay: -1.5s; }
+        .balloon:nth-child(5) { animation-delay: -2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .cake-section {
+            margin: 2rem 0;
+        }
+
+        .cake {
+            font-size: 4rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .childhood-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 248, 220, 0.9), rgba(255, 240, 245, 0.9));
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .childhood-title {
+            font-size: 1.6rem;
+            color: #ff8c42;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .childhood-photo-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .childhood-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 4px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            animation: childFloat 5s ease-in-out infinite;
+            filter: sepia(10%) brightness(1.1);
+        }
+
+        .childhood-photo:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            filter: sepia(0%) brightness(1.2);
+        }
+
+        @keyframes childFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-5px) rotate(-0.5deg); }
+            75% { transform: translateY(-15px) rotate(1.5deg); }
+        }
+
+        .childhood-message {
+            font-size: 1.1rem;
+            color: #d4671b;
+            line-height: 1.6;
+            text-align: center;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .photo-gallery {
+            margin: 3rem 0;
+            padding: 2rem 0;
+        }
+
+        .photo-gallery-title {
+            font-size: 1.6rem;
+            color: #e91e63;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff9a9e;
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+            transition: all 0.3s ease;
+            animation: photoFloat 4s ease-in-out infinite;
+        }
+
+        .photo:nth-child(2) { animation-delay: -1s; }
+        .photo:nth-child(3) { animation-delay: -2s; }
+
+        .photo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(255, 154, 158, 0.6);
+            border-color: #e91e63;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(1deg); }
+            50% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        .beauty-message {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.9));
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 154, 158, 0.3);
+        }
+
+        .beauty-title {
+            font-size: 1.8rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .beauty-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            text-align: left;
+            font-style: italic;
+            text-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .heart-decoration {
+            color: #e91e63;
+            font-size: 1.5rem;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin: 0 0.5rem;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Confetti Effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+            z-index: 1;
+        }
+
+        .confetti:nth-child(1) { left: 10%; background: #4ecdc4; animation-delay: 0s; }
+        .confetti:nth-child(2) { left: 20%; background: #45b7d1; animation-delay: 0.5s; }
+        .confetti:nth-child(3) { left: 30%; background: #f9ca24; animation-delay: 1s; }
+        .confetti:nth-child(4) { left: 40%; background: #6c5ce7; animation-delay: 1.5s; }
+        .confetti:nth-child(5) { left: 50%; background: #fd79a8; animation-delay: 2s; }
+        .confetti:nth-child(6) { left: 60%; background: #00b894; animation-delay: 2.5s; }
+        .confetti:nth-child(7) { left: 70%; background: #e17055; animation-delay: 3s; }
+        .confetti:nth-child(8) { left: 80%; background: #fdcb6e; animation-delay: 0.25s; }
+        .confetti:nth-child(9) { left: 90%; background: #e84393; animation-delay: 0.75s; }
+        .confetti:nth-child(10) { left: 5%; background: #00cec9; animation-delay: 1.25s; }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .gift-button {
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .message {
+                font-size: 1.1rem;
+            }
+            .card {
+                padding: 2rem 1.5rem;
+            }
+            .balloon {
+                font-size: 2.5rem;
+            }
+            .cake {
+                font-size: 3rem;
+            }
+            .childhood-photo {
+                width: 150px;
+                height: 150px;
+            }
+            .childhood-title, .photo-gallery-title {
+                font-size: 1.4rem;
+            }
+            .childhood-message {
+                font-size: 1rem;
+            }
+            .photo {
+                width: 120px;
+                height: 120px;
+            }
+            .photo-container {
+                gap: 0.5rem;
+            }
+            .beauty-message {
+                padding: 1.5rem;
+            }
+            .beauty-title {
+                font-size: 1.5rem;
+            }
+            .beauty-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .childhood-photo {
+                width: 120px;
+                height: 120px;
+            }
+            .photo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing-page" id="landingPage">
+        <div class="sparkle">✨</div>
+        <div class="sparkle">⭐</div>
+        <div class="sparkle">💫</div>
+        <div class="sparkle">✨</div>
+        <div class="sparkle">🌟</div>
+        <div class="sparkle">✨</div>
+
+        <div class="landing-container">
+            <button class="gift-button" onclick="checkDate()">
+                Click Me 🎁
+            </button>
+        </div>
+    </div>
+
+    <!-- Alert Overlay -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-message" id="alertMessage"></div>
+            <button class="alert-button" onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <!-- Birthday Card Page -->
+    <div class="birthday-card" id="birthdayCard">
+        <!-- Confetti -->
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+
+        <div class="card">
+            <div class="title">🎉 Happy Birthday Trisha 🎉</div>
+            
+            <div class="message">
+                You're really special to me, and I wish you all the happiness in the world
+                <span class="heart-decoration">💖</span>
+            </div>
+            
+            <div class="decorations">
+                <div class="balloon">🎈</div>
+                <div class="balloon">🎈</div>
+                <div class="balloon">🎈</div>
+                <div class="balloon">🎈</div>
+                <div class="balloon">🎈</div>
+            </div>
+            
+            <div class="cake-section">
+                <div class="cake">🎂</div>
+            </div>
+
+            <div class="childhood-section">
+                <div class="childhood-title">From Adorable Then... 👶✨</div>
+                <div class="childhood-photo-container">
+                    <img src="WhatsApp Image 2025-08-31 at 23.27.35_5e79be3d.jpg" alt="Little Trisha" class="childhood-photo">
+                </div>
+                <div class="childhood-message">
+                    Look at this little angel! Even as a child, you had that same beautiful smile 
+                    and sparkling eyes that light up the world. Some things never change - 
+                    you've always been absolutely precious! 
+                    <span class="heart-decoration">🥰</span>
+                </div>
+            </div>
+            
+            <div class="photo-gallery">
+                <div class="photo-gallery-title">...To Absolutely Stunning Now! 💖</div>
+                <div class="photo-container">
+                    <img src="IMG_20250831_232952.jpg" alt="Beautiful Trisha" class="photo">
+                    <img src="IMG_20250831_233004.jpg" alt="Beautiful Trisha" class="photo">
+                    <img src="IMG_20250831_233014.jpg" alt="Beautiful Trisha" class="photo">
+                </div>
+            </div>
+            
+            <div class="beauty-message">
+                <div class="beauty-title">You Are Absolutely Beautiful ✨</div>
+                <p class="beauty-text">
+                    You’ve been a really amazing friend to me — someone I can always count on, laugh with, and share moments with. I just want you to know how much I appreciate your friendship. You’re truly a beautiful person, not just on the outside but also in the way you care, support, and spread positivity around you.
+
+Wishing you endless happiness, success, and all the good things you deserve. 🎂🎉
+                    <span class="heart-decoration">💕</span>
+                </p>
+            </div>
+            
+            <div class="message">
+                May your special day be filled with joy, laughter, and all your favorite things!
+                <span class="heart-decoration">✨</span>
+            </div>
+            
+            <button class="back-button" onclick="goBackToLanding()">← Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function checkDate() {
+            const today = new Date();
+            const targetDate = new Date(today.getFullYear(), 8, 1); // September 1st (month is 0-indexed)
+            
+            // Normalize dates to compare only year, month, and day
+            const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const targetDateOnly = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+            
+            if (todayDateOnly.getTime() === targetDateOnly.getTime()) {
+                // Today is September 1st - show birthday card
+                showBirthdayCard();
+            } else if (todayDateOnly < targetDateOnly) {
+                // Before September 1st
+                showAlert("Please open it at 12 AM on 1st September 🎉");
+            } else {
+                // After September 1st
+                showAlert("Oops! You're late 😜 But still… Happy Belated Birthday! 🎂");
+            }
+        }
+        
+        function showAlert(message) {
+            document.getElementById('alertMessage').textContent = message;
+            document.getElementById('alertOverlay').style.display = 'flex';
+        }
+        
+        function closeAlert() {
+            document.getElementById('alertOverlay').style.display = 'none';
+        }
+        
+        function showBirthdayCard() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('birthdayCard').style.display = 'block';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function goBackToLanding() {
+            document.getElementById('birthdayCard').style.display = 'none';
+            document.getElementById('landingPage').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close alert when clicking outside the box
+        document.getElementById('alertOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAlert();
+            }
+        });
+        
+        // Add interactive sparkle on click for birthday card
+        document.addEventListener('click', function(e) {
+            // Only add sparkles when on the birthday card page
+            if (document.getElementById('birthdayCard').style.display === 'block') {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.fontSize = '20px';
+                sparkle.style.color = '#ffd700';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '999';
+                sparkle.innerHTML = '✨';
+                sparkle.style.animation = 'sparkleClick 1s ease-out forwards';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        });
+        
+        // Add CSS for sparkle click animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleClick {
+                0% {
+                    transform: scale(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1.5) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize page
+        document.body.style.overflow = 'hidden';
+    </script>
+</body>
+</html>
